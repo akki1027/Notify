@@ -1,0 +1,10 @@
+<div>
+	<%= form_for @tweet do |f| %>
+		<div class="form_field">
+			<%= f.text_area :content, placeholder: "ツイート内容" %>
+		</div>
+		<div class="submit">
+			<%= f.submit "更新する" %>
+		</div>
+	<% end %>
+</div>

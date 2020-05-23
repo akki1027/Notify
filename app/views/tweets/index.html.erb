@@ -1,2 +1,28 @@
-<h1>Tweets#index</h1>
-<p>Find me in app/views/tweets/index.html.erb</p>
+<div class="flash-notice">
+	<%= flash[:notice] %>
+</div>
+
+<div>
+	<%= form_for @tweet do |f| %>
+		<div class="form_field">
+			<%= f.text_area :content, placeholder: "ツイート内容" %>
+		</div>
+		<div class="submit">
+			<%= f.submit "ツイートする" %>
+		</div>
+	<% end %>
+</div>
+
+<% @tweets.each do |tweet| %>
+	<div>
+		<%= tweet.user.name %>
+	</div>
+	<div>
+		<%= tweet.content %>
+	</div>
+	<%= link_to '詳細', tweet_path(tweet) %>
+	<% if tweet.user == current_user %>
+		<%= link_to '編集', edit_tweet_path(tweet) %>
+		<%= link_to '削除', tweet_path(tweet), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+	<% end %>
+<% end %>
