@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_151237) do
+ActiveRecord::Schema.define(version: 2020_05_22_153851) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
     t.integer "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "tweet_id"
+    t.integer "comment_id"
+    t.string "kind", null: false
+    t.boolean "viewed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
