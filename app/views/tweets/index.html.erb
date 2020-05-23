@@ -1,28 +1,38 @@
-<div class="flash-notice">
-	<%= flash[:notice] %>
-</div>
-
-<div>
-	<%= form_for @tweet do |f| %>
-		<div class="form_field">
-			<%= f.text_area :content, placeholder: "ツイート内容" %>
+<div class="container">
+	<div class="row">
+		<div class="flash-notice">
+			<%= flash[:notice] %>
 		</div>
-		<div class="submit">
-			<%= f.submit "ツイートする" %>
-		</div>
-	<% end %>
-</div>
+	</div>
 
-<% @tweets.each do |tweet| %>
-	<div>
-		<%= tweet.user.name %>
+	<div class="row">
+		<div>
+			<%= form_for @tweet do |f| %>
+				<div class="form_field">
+					<%= f.text_area :content, placeholder: "ツイート内容" %>
+				</div>
+				<div class="submit">
+					<%= f.submit "ツイートする" %>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<div>
-		<%= tweet.content %>
+
+	<div class="row">
+		<div class="col-xs-4">
+			<% @tweets.each do |tweet| %>
+				<div class="action">
+					<%= link_to '詳細', tweet_path(tweet) %>
+					<% if tweet.user == current_user %>
+						<%= link_to '編集', edit_tweet_path(tweet) %>
+						<%= link_to '削除', tweet_path(tweet), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<% end %>
+				</div>
+				<div>
+					<%= tweet.user.name %><br>
+					<%= tweet.content %>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<%= link_to '詳細', tweet_path(tweet) %>
-	<% if tweet.user == current_user %>
-		<%= link_to '編集', edit_tweet_path(tweet) %>
-		<%= link_to '削除', tweet_path(tweet), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-	<% end %>
-<% end %>
+</div>
