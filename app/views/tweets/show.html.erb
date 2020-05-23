@@ -13,5 +13,26 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<%= form_for [@tweet, @comment] do |f| %>
+			<div class="field">
+				<%= f.text_area :content, placeholder: "コメント内容" %>
+			</div>
+			<div class="submit">
+				<%= f.submit "コメントを投稿する" %>
+			</div>
+		<% end %>
+	</div>
+	<div class="row">
+		<div class="col-xs-4">
+			<% @comments.each do |comment| %>
+				<div class="action">
+					<%= link_to '削除', tweet_comment_path(tweet_id: comment.tweet_id, id: comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+				</div>
+				<%= comment.user.name %><br>
+				<%= comment.content %><br>
+			<% end %>
+		</div>
+	</div>
 </div>
 
