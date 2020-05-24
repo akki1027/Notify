@@ -9,4 +9,7 @@ module NotificationsHelper
 			tag.a(visitor.name) + 'があなたの' + tag.a('ツイート', href: tweet_path(notification.tweet_id)) + 'にコメントしました。'
 		end
 	end
+	def new_notifications
+    	@notifications = current_user.passive_notifications.where(viewed: false)
+	end
 end
