@@ -143,8 +143,11 @@ end
 
 
 # Notificationsヘルパーファイルの設定
-ヘルパーにメソッドを作成しておきます。  
+ヘルパーに、後で使うメソッドを二つ作成しておきます。  
+* １つ目のメソッドについて  
 ここでは、まずどの種類の通知かを判断します。例えば、誰かが自分のTweet(投稿)にコメントしてきた場合、通知の種類がコメントの時の処理が走り、『Aさんが、あなたのツイートにコメントしました』という内容の通知を表示します。  
+* ２つ目のメソッドについて  
+未読の通知がある場合に、アイコンなどを表示させ、ユーザーに未読の通知があるのを知らせたい時に使います。  
 app/helpers/notifications_helper.rb
 ```bash
 def notification_form(notification)
@@ -157,11 +160,14 @@ def notification_form(notification)
 		tag.a(visitor.name) + 'があなたの' + tag.a('ツイート', href: tweet_path(notification.tweet_id)) + 'にコメントしました。'
 	end
 end
+def new_notifications
+    @notifications = current_user.passive_notifications.where(viewed: false)
+end
 ```
 
 
 # 最後に、表示画面を書いていきます
-ここで、先ほどヘルパーファイルに作成したメソッドを使います。  
+ここで、先ほどヘルパーファイルに作成した１つ目のメソッドを使います。  
 それにより、通知の種類によって、通知の表示を変更することが可能になります。  
 app/views/notifications/index.html.erb
 ```bash
@@ -181,4 +187,15 @@ app/views/notifications/index.html.erb
 		<% end %>
 	</div>
 </div>
+```
+
+
+#### 未読の通知がある時、通知という文字の隣にアイコンを表示させる
+先ほどヘルパーファイルに作成した２つ目のメソッドを使います。
+```bash
+<% if new_notifications.any? %>
+	<li><i class="fas fa-circle" style="color: #FFD725"></i><%= link_to '通知', notifications_path %></li>
+<% else %>
+	<li><%= link_to '通知', notifications_path %></li>
+<% end %>
 ```
