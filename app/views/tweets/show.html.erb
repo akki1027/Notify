@@ -8,6 +8,7 @@
 				<% end %>
 			</div>
 			<div>
+				<%= @tweet.created_at.to_s(:datetime_jp) %><br>
 				<%= @tweet.user.name %><br>
 				<%= @tweet.content %>
 			</div>

@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
 		comment = current_user.comments.new(comment_params)
 		comment.tweet_id = params[:tweet_id]
 		if comment.save
+			tweet.save_notification_comment!(current_user, comment.id, tweet.user_id)
 			redirect_to tweet_path(tweet)
 		else
 			redirect_to tweet_path(tweet)

@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="row">
+		<% if @notifications.exists? %>
+			<div class="notifications-list">
+				<% @notifications.each do |notification| %>
+				  <%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
+				  <% if @comment.present? %>
+				    <p><%= notification.comment.content.truncate(50) %></p>
+				  <% end %>
+				<% end %>
+			</div>
+		<% else %>
+			<p>通知はありません。</p>
+		<% end %>
+	</div>
+</div>

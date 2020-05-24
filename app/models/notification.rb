@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
 	validates :visitor_id, presence: true
 	validates :visited_id, presence: true
 	KIND_VALUES = ["comment"]
-	validates :kind, presence: true, inclusion: { in:KIND_VALUES }
+	validates :kind, presence: true, inclusion: { in: KIND_VALUES }
 	validates :viewed, inclusion: { in: [true, false] }
 	default_scope -> { order(created_at: :desc) }
 end
