@@ -197,3 +197,8 @@ app/views/notifications/index.html.erb
 	<li><%= link_to '通知', notifications_path %></li>
 <% end %>
 ```
+
+
+![app/views/tweets/index.html.erb](https://user-images.githubusercontent.com/60538665/82782968-7a29d180-9e98-11ea-81d7-ad6e939155aa.png)
+
+![app/views/notifications/index.html.erb](https://user-images.githubusercontent.com/60538665/82783148-e4427680-9e98-11ea-9894-7565871efc2c.png)
