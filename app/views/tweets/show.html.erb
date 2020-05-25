@@ -40,7 +40,9 @@
 				<% @comments.each do |comment| %>
 					<li class="list-group-item">
 						<div class="tweet-actions">
-							<%= link_to '削除', tweet_comment_path(tweet_id: comment.tweet_id, id: comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+							<% if comment.user == current_user %>
+								<%= link_to '削除', tweet_comment_path(tweet_id: comment.tweet_id, id: comment.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+							<% end %>
 							<%= comment.created_at.to_s(:datetime_jp) %>
 						</div>
 						<%= comment.user.name %><br>
