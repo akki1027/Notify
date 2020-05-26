@@ -1,4 +1,4 @@
-# Notification(コメントなどされた時に通知を送れる/受け取れるようにしよう)
+# Notify(コメントをした時に通知を送れる/された側は受け取れるようにしよう)
 
 
 # 初めに
@@ -167,6 +167,7 @@ end
 # 最後に、表示画面を書いていきます
 ここで、先ほどヘルパーファイルに作成した１つ目のメソッドを使います。  
 それにより、通知の種類によって、通知の表示を変更することが可能になります。  
+<% if notification.comment.present? %>は今回必要ありませんが、後にコメント以外の種類の通知を作成したくなった場合に必要になってくるので、先に記述しておきます。  
 app/views/notifications/index.html.erb
 ```bash
 <div class="container">
@@ -175,7 +176,7 @@ app/views/notifications/index.html.erb
 			<div class="notifications-list">
 				<% @notifications.each do |notification| %>
 				  <%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
-				  <% if @comment.present? %>
+				  <% if notification.comment.present? %>
 				    <p><%= notification.comment.content.truncate(50) %></p>
 				  <% end %>
 				<% end %>

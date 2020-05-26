@@ -7,7 +7,7 @@
 					<% @notifications.each do |notification| %>
 						<li class="list-group-item">
 							<%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
-							<% if @comment.present? %>
+							<% if notification.comment.present? %>
 								<p><%= notification.comment.content.truncate(50) %></p>
 							<% end %>
 						</li>
