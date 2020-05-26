@@ -101,7 +101,7 @@ def save_notification_comment!(current_user, comment_id, user_id)
     )
     # 自分で自分のツイートにコメントした時は、通知を送らない。自分自身に通知を送るのは、個人的に変な気がする
     if notification.visitor_id != notification.visited_id and notification.valid?
-    	notification.save
+		notification.save
     end
 end
 ```
@@ -159,7 +159,7 @@ def notification_form(notification)
 	end
 end
 def new_notifications
-    @notifications = current_user.passive_notifications.where(viewed: false)
+	@notifications = current_user.passive_notifications.where(viewed: false)
 end
 ```
 
@@ -175,10 +175,10 @@ app/views/notifications/index.html.erb
 		<% if @notifications.exists? %>
 			<div class="notifications-list">
 				<% @notifications.each do |notification| %>
-				  <%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
-				  <% if notification.comment.present? %>
-				    <p><%= notification.comment.content.truncate(50) %></p>
-				  <% end %>
+					<%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
+					<% if notification.comment.present? %>
+				    	<p><%= notification.comment.content.truncate(50) %></p>
+				  	<% end %>
 				<% end %>
 			</div>
 		<% else %>
