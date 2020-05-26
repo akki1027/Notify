@@ -177,7 +177,7 @@ app/views/notifications/index.html.erb
 				<% @notifications.each do |notification| %>
 					<%= notification_form(notification) %><%= "(#{time_ago_in_words(notification.created_at)}前)" %><br>
 					<% if notification.comment.present? %>
-				    	<p><%= notification.comment.content.truncate(50) %></p>
+						<p><%= notification.comment.content.truncate(50) %></p>
 				  	<% end %>
 				<% end %>
 			</div>
